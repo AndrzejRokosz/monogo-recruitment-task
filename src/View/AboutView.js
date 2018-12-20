@@ -1,9 +1,20 @@
 import React from 'react'
+import { Paper } from 'material-ui'
 
-const AboutView=(props)=>(
-    <div>
-
-    </div>
+const style = {
+    paper: {
+        margin: '10px',
+        padding: '20px'
+    }
+}
+const AboutView = (props) => (
+    <Paper
+        style={style.paper}
+    >
+    <h3>
+sadfasdfsa
+    </h3>
+    </Paper>
 )
 
 export default AboutView
