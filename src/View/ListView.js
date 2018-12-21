@@ -71,6 +71,7 @@ class ListView extends React.Component {
                         <TextField
                             floatingLabelText="Search user by last name"
                             onChange={this.onSearchedTextChangeHandler}
+                            fullWidth={true}
                         />
                         <br></br>
                         {
@@ -85,7 +86,7 @@ class ListView extends React.Component {
                                             >
                                                 <img className='user-container__image' src={user.picture.large} alt='user' />
                                                 <div>{`${user.name.last} ${user.name.first}  Age: ${user.dob.age}`}</div>
-                                                <a href={user.email}>{user.email}</a>
+                                                <a className='user-container__email' href={user.email}>{user.email}</a>
                                                 <div>{`Address: `}</div>
                                                 <div>{`${user.location.street}, ${user.location.city} `} </div>
                                                 <div>{`Phone: ${user.phone}`}</div>
