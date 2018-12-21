@@ -14,7 +14,7 @@ const style = {
 
 class Router extends React.Component {
     state = {
-        title: 'My new app',
+        title: 'My fetching users app for Monogo ',
         isDrawerOpen: false
     }
 
@@ -47,7 +47,7 @@ class Router extends React.Component {
 
                     <Route path="/" exact component={ListView} />
                     <Route path="/list" exact component={ListView} />
-                    <Route path="/list/:currentPage" component={ListView}/>
+                    <Route path="/list/:userId" component={ListView}/>
                     <Route path="/about" component={AboutView} />
                 </div>
             </BrowserRouter>

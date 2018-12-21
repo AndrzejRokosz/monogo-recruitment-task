@@ -12,6 +12,7 @@ class ListView extends React.Component {
         dataPerPage: 5,
         searchedText: ''
     }
+
     componentDidMount() {
         fetch(`https://randomuser.me/api?results=${NUMBER_OF_USERS_TO_BE_FETCHED}`)
             .then(response => response.json())
@@ -25,10 +26,18 @@ class ListView extends React.Component {
     }
 
     getCurrentPageData = () => {
+        
         const { data, currentPage, dataPerPage } = this.state
         const indexOfLastDataSetOnThePage = currentPage * dataPerPage
         const indexOfFirstDataSetOnThePage = indexOfLastDataSetOnThePage - dataPerPage
-        return data.slice(indexOfFirstDataSetOnThePage, indexOfLastDataSetOnThePage)
+
+        const filteredData = data ?
+            data.filter(user => (
+                unifyString(user.name.last)
+                    .includes(unifyString(this.state.searchedText))
+            ))
+            : data;
+        return filteredData.slice(indexOfFirstDataSetOnThePage, indexOfLastDataSetOnThePage)
     }
 
     prevPageClickHandler = () => {
@@ -63,29 +72,26 @@ class ListView extends React.Component {
                             floatingLabelText="Search user by last name"
                             onChange={this.onSearchedTextChangeHandler}
                         />
+                        {
+                            this.getCurrentPageData() ?
+                                this.getCurrentPageData().map ?
+                                    this.getCurrentPageData()
+                                        .map(user => (
+                                            <div
+                                                className='single-user-container'
+                                                key={user.email}
 
-                        {this.getCurrentPageData() ?
-                            this.getCurrentPageData().map ?
-                                this.getCurrentPageData()
-                                    .filter(user => (
-                                        unifyString(user.name.last)
-                                            .includes(unifyString(this.state.searchedText))
-                                    ))
-                                    .map(user => (
-                                        <div
-                                            className='single-user-container'
-                                            key={user.email}
-                                        >
-                                            <img className='user-container__image' src={user.picture.large} alt='user' />
-                                            <div>{`${user.name.last} ${user.name.first}  Age: ${user.dob.age}`}</div>
-                                            <a href={user.email}>{user.email}</a>
-                                            <div>{`Address: `}</div>
-                                            <div>{`${user.location.street}, ${user.location.city} `} </div>
-                                            <div>{`Phone: ${user.phone}`}</div>
-                                        </div>
-                                    ))
-                                : 'Something went wrong !'
-                            : 'Loading data ...'
+                                            >
+                                                <img className='user-container__image' src={user.picture.large} alt='user' />
+                                                <div>{`${user.name.last} ${user.name.first}  Age: ${user.dob.age}`}</div>
+                                                <a href={user.email}>{user.email}</a>
+                                                <div>{`Address: `}</div>
+                                                <div>{`${user.location.street}, ${user.location.city} `} </div>
+                                                <div>{`Phone: ${user.phone}`}</div>
+                                            </div>
+                                        ))
+                                    : 'Something went wrong !'
+                                : 'Loading data ...'
                         }
                     </div>
                 }
