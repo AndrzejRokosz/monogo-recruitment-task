@@ -32,7 +32,6 @@ class Router extends React.Component {
                         onLeftIconButtonClick={this.toggleDrawer}
                         open={this.state.isDrawerOpen}
                     >
-
                         <Link
                             style={style.link}
                             onClick={this.handleClose}
@@ -46,12 +45,12 @@ class Router extends React.Component {
                             to='/about'>
                             <MenuItem>About</MenuItem>
                         </Link>
-
                     </Navigation>
+
                     <Route path="/" exact component={ListView} />
                     <Route path="/list" exact component={ListView} />
+                    <Route path="/:id" component={ListView}/>
                     <Route path="/about" component={AboutView} />
-
                 </div>
             </BrowserRouter>
         )
