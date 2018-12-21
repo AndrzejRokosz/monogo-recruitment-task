@@ -1,5 +1,4 @@
 import React from 'react'
-import { Paper } from 'material-ui'
 import '../styles/listView.css'
 
 const NUMBER_OF_USERS_TO_BE_FETCHED = 50
@@ -48,17 +47,16 @@ class ListView extends React.Component {
                 ></div>
                 {
                     <div className='inner-data-container'>
-                        <Paper
+                        <div
                             className='inner-data-container__currentPage-header'
-                            zDepth={1}
+                            
                         >{`Page: ${this.state.currentPage}`}
-                        </Paper>
+                        </div>
                         {this.getCurrentPageData() ?
                             this.getCurrentPageData().map ?
                                 this.getCurrentPageData().map(user => (
-                                    <Paper
+                                    <div
                                         className='single-user-container'
-                                        zDepth={1}
                                         key={user.email}
                                     >
                                         <img className='user-container__image' src={user.picture.large} alt='user' />
@@ -67,7 +65,7 @@ class ListView extends React.Component {
                                         <div>{`Address: `}</div>
                                         <div>{`${user.location.street}, ${user.location.city} `} </div>
                                         <div>{`Phone: ${user.phone}`}</div>
-                                    </Paper>
+                                    </div>
                                 ))
                                 : 'Something went wrong !'
                             : 'Loading data ...'

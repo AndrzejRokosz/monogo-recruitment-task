@@ -18,12 +18,18 @@
 }
 .single-user-container{
     margin:5px 0;
-        text-align: center;
-        padding: 10px;   
+    text-align: center;
+    padding: 10px; 
+    
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
+.single-user-container:nth-child(even){
+    background-color:  rgba(211, 236, 240, 0.603);
+}
+
 .inner-data-container__currentPage-header{
     padding:20px;
     font-size:20px;
     margin:5px 0;
-
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
