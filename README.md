@@ -4,4 +4,4 @@ This is a simple data fetching app . I used public randomuser.me API to get some
 
 gitHub -> https://github.com/AndrzejRokosz/monogo-recruitment-task
 
-Published to -> monogo-fetching-random-data-app.surge.sh
+Published to -> monogo-recr-task.surge.sh
