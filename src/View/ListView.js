@@ -72,6 +72,7 @@ class ListView extends React.Component {
                             floatingLabelText="Search user by last name"
                             onChange={this.onSearchedTextChangeHandler}
                         />
+                        <br></br>
                         {
                             this.getCurrentPageData() ?
                                 this.getCurrentPageData().map ?
@@ -90,8 +91,8 @@ class ListView extends React.Component {
                                                 <div>{`Phone: ${user.phone}`}</div>
                                             </div>
                                         ))
-                                    : 'Something went wrong !'
-                                : 'Loading data ...'
+                                    :<strong style={{fontSize: '20px'}}>'Something went wrong !'</strong>
+                                : <strong style={{fontSize: '20px'}}>'Loading data ...'</strong>
                         }
                     </div>
                 }
