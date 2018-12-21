@@ -1,30 +1,8 @@
 import React from 'react'
-import { Paper, Divider, RaisedButton } from 'material-ui'
+import { Paper } from 'material-ui'
+import '../styles/listView.css'
 
-
-const style = {
-    paper: {
-        margin: '10px',
-        padding: '10px'
-    },
-    container: {
-        maxWidth: '600px',
-        textAlign: 'center',
-        padding: '10px'
-    },
-    innerBox: {
-        width: '100%',
-        margin: 'auto'
-    },
-    image: {
-        width: '50%'
-    },
-    button: {
-        padding: '2px',
-        margin: 'auto',
-        width: '50%'
-    }
-}
+const NUMBER_OF_USERS_TO_BE_FETCHED = 50
 
 class ListView extends React.Component {
     state = {
@@ -32,15 +10,13 @@ class ListView extends React.Component {
         currentPage: 1,
         dataPerPage: 5,
     }
-
     componentDidMount() {
-        fetch('https://randomuser.me/api?results=16')
+        fetch(`https://randomuser.me/api?results=${NUMBER_OF_USERS_TO_BE_FETCHED}`)
             .then(response => response.json())
             .then(data => this.setState({
                 data: data.results
             }))
     }
-
 
     getCurrentPageData = () => {
         const { data, currentPage, dataPerPage } = this.state
@@ -49,62 +25,60 @@ class ListView extends React.Component {
         return data.slice(indexOfFirstDataSetOnThePage, indexOfLastDataSetOnThePage)
     }
 
-    prevPageClickHandler = () => (
-        this.state.currentPage >= 2 ?
-            this.setState({ currentPage: this.state.currentPage - 1 }) :
-            null
-    )
-    nextPageClickHandler = () => (
-        this.state.currentPage < Math.ceil(this.state.data.length / this.state.dataPerPage) ?
-            this.setState({ currentPage: this.state.currentPage + 1 }) :
-            null
-    )
+    prevPageClickHandler = () => {
+        if (this.state.currentPage >= 2) {
+            this.props.history.push(`/list/${this.state.currentPage - 1}`)
+            this.setState({ currentPage: this.state.currentPage - 1 })
+        }
+    }
+    nextPageClickHandler = () => {
+        if (this.state.currentPage < Math.ceil(this.state.data.length / this.state.dataPerPage)) {
+            this.props.history.push(`/list/${this.state.currentPage + 1}`)
+            this.setState({ currentPage: this.state.currentPage + 1 })
+        }
+    }
 
     render() {
-
         return (
-            <Paper
-                style={style.paper}
+            <div className='main-container'
             >
+                <div
+                    className='main-container__nav-button'
+                    onClick={this.prevPageClickHandler}
+                ></div>
                 {
-                    this.getCurrentPageData() ?
-                        this.getCurrentPageData().map ?
-                            this.getCurrentPageData().map(user => (
-                                <div
-                                    style={style.container}
-                                    key={user.email}>
-                                    <div
-                                        style={style.innerBox}
+                    <div className='inner-data-container'>
+                        <Paper
+                            className='inner-data-container__currentPage-header'
+                            zDepth={1}
+                        >{`Page: ${this.state.currentPage}`}
+                        </Paper>
+                        {this.getCurrentPageData() ?
+                            this.getCurrentPageData().map ?
+                                this.getCurrentPageData().map(user => (
+                                    <Paper
+                                        className='single-user-container'
+                                        zDepth={1}
+                                        key={user.email}
                                     >
-                                        <img style={style.image} src={user.picture.large} alt='user' />
+                                        <img className='user-container__image' src={user.picture.large} alt='user' />
                                         <div>{`${user.name.first} ${user.name.last} Age: ${user.dob.age}`}</div>
                                         <a href={user.email}>{user.email}</a>
                                         <div>{`Address: `}</div>
                                         <div>{`${user.location.street}, ${user.location.city} `} </div>
                                         <div>{`Phone: ${user.phone}`}</div>
-                                        <Divider />
-                                    </div>
-                                </div>
-                            ))
-                            : 'Something went wrong !'
-                        : 'Loading data ...'
-
+                                    </Paper>
+                                ))
+                                : 'Something went wrong !'
+                            : 'Loading data ...'
+                        }
+                    </div>
                 }
-                {<div >
-                    <RaisedButton
-                        style={style.button}
-                        label='Prev'
-                        primary={true}
-                        onClick={this.prevPageClickHandler} />
-                    <div>{this.state.currentPage}</div>
-                    <RaisedButton
-                        style={style.button}
-                        label='Next'
-                        primary={true}
-                        onClick={this.nextPageClickHandler}
-                    />
-                </div>}
-            </Paper>
+                <div
+                    className='main-container__nav-button'
+                    onClick={this.nextPageClickHandler}
+                ></div>
+            </div>
         )
     }
 }

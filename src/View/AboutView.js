@@ -4,7 +4,7 @@ import { Paper } from 'material-ui'
 const style = {
     paper: {
         margin: '10px',
-        padding: '20px'
+        padding: '10px'
     }
 }
 const AboutView = (props) => (

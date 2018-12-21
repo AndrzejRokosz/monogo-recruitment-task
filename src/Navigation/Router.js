@@ -12,8 +12,6 @@ const style = {
     }
 }
 
-
-
 class Router extends React.Component {
     state = {
         title: 'My new app',
@@ -49,7 +47,7 @@ class Router extends React.Component {
 
                     <Route path="/" exact component={ListView} />
                     <Route path="/list" exact component={ListView} />
-                    <Route path="/:id" component={ListView}/>
+                    <Route path="/list/:currentPage" component={ListView}/>
                     <Route path="/about" component={AboutView} />
                 </div>
             </BrowserRouter>
