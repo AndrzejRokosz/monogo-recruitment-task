@@ -6,4 +6,4 @@ tech stack used->javascript,react,react-router,material-ui,css
 
 gitHub -> https://github.com/AndrzejRokosz/monogo-recruitment-task
 
-Published to -> monogo-recr-task.surge.sh
+Published to -> monogo-fetching.surge.sh
