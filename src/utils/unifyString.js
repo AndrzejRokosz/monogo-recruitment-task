@@ -4,4 +4,4 @@ export const unifyString = string => (
         .replace(/\s/g, '')
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, "")
-)
+);

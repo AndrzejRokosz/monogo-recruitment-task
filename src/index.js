@@ -1,9 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 import { MuiThemeProvider } from 'material-ui/styles';
-
 
 ReactDOM.render(
     <MuiThemeProvider>
@@ -11,6 +10,6 @@ ReactDOM.render(
     </MuiThemeProvider>
     ,
     document.getElementById('root')
-    )
+);
 
 

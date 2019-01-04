@@ -1,10 +1,11 @@
-import React from 'react'
-import Navigation from './Navigation'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
-
-import ListView from '../View/ListView'
-import AboutView from '../View/AboutView'
+import React from 'react';
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import MenuItem from 'material-ui/MenuItem';
+
+import Navigation from './Navigation';
+import ListView from '../View/ListView';
+import AboutView from '../View/AboutView';
+import NotFoundView from '../View/NotFoundView';
 
 const style = {
     link: {
@@ -14,16 +15,18 @@ const style = {
 
 class Router extends React.Component {
     state = {
-        title: 'My fetching users app for Monogo ',
+        title: 'Fetching users app for Monogo ',
         isDrawerOpen: false
     }
 
-    toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen })
-    handleClose = () => this.setState({ isDrawerOpen: false })
+    toggleDrawer = () => this.setState({ isDrawerOpen: !this.state.isDrawerOpen });
+    handleClose = () => this.setState({ isDrawerOpen: false });
 
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter
+
+            >
                 <div>
                     <Navigation
                         title={this.state.title}
@@ -33,10 +36,10 @@ class Router extends React.Component {
                         <Link
                             style={style.link}
                             onClick={this.handleClose}
-                            to='/'>
+                            to='/list'>
                             <MenuItem>List</MenuItem>
                         </Link>
-                        
+
                         <Link
                             style={style.link}
                             onClick={this.handleClose}
@@ -45,13 +48,16 @@ class Router extends React.Component {
                         </Link>
                     </Navigation>
 
-                    <Route path="/" exact component={ListView} />
-                    <Route path="/list" exact component={ListView} />
-                    <Route path="/list/:userId" component={ListView}/>
-                    <Route path="/about" component={AboutView} />
+                    <Switch>
+                        <Route path="/" exact component={ListView} />
+                        <Route path="/list" exact component={ListView} />
+                        <Route path="/list/:userId([1-9]|10)" component={ListView} />
+                        <Route path="/about" component={AboutView} />
+                        <Route path='*' component={NotFoundView} />
+                    </Switch>
                 </div>
             </BrowserRouter>
         )
     }
 }
-export default Router
+export default Router;

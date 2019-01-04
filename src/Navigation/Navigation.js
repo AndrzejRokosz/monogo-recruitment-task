@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import MyAppBar from './AppBar';
 import SideBar from './SideBar';
@@ -16,5 +16,4 @@ const Navigation=(props)=>(
     </SideBar>
 </div>
 )
-
-export default Navigation
+export default Navigation;
